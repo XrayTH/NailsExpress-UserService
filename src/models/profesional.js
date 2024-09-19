@@ -24,8 +24,13 @@ const profesionalSchema = new mongoose.Schema({
         required: true
     },
     ubicacion: {
-        type: String,
-        required: true
+        lat: {
+            type: Number,
+        },
+        lng: {
+            type: Number,
+            required: true
+        }
     }
 }, { timestamps: true });
 
