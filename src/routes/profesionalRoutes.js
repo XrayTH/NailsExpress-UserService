@@ -31,4 +31,6 @@ router.put('/:id', updateProfesional);
 // Eliminar profesional
 router.delete('/:id', deleteProfesional);
 
+router.patch('/:email/toggle-active', profesionalController.toggleActiveStatus);
+
 module.exports = router;

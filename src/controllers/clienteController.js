@@ -67,6 +67,26 @@ const deleteCliente = async (req, res) => {
     }
 };
 
+const Cliente = require('../models/cliente');
+
+// Cambiar estado de activo
+exports.toggleActiveStatus = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const cliente = await Cliente.findOne({ email });
+
+        if (!cliente) return res.status(404).json({ message: 'Cliente no encontrado' });
+
+        cliente.activo = !cliente.activo; // Cambiar el estado
+        await cliente.save();
+
+        res.status(200).json({ message: 'Estado actualizado', activo: cliente.activo });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al cambiar el estado', error });
+    }
+};
+
+
 module.exports = {
     getClientes,
     getClienteById,

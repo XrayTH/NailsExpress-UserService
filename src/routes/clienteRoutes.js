@@ -31,4 +31,6 @@ router.put('/:id', updateCliente);
 // Eliminar cliente
 router.delete('/:id', deleteCliente);
 
+router.patch('/:email/toggle-active', clienteController.toggleActiveStatus);
+
 module.exports = router;

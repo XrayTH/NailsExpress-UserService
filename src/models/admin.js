@@ -10,12 +10,14 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true,
-        match: [/\S+@\S+\.\S+/, 'Please enter a valid email address']
+        match: [/\S+@\S+\.\S+/, 'Por favor ingresa un correo electrónico válido']
     },
     contraseña: {
         type: String,
         required: true
-    }
+    },
+    activo: { type: Boolean, default: true } // Nuevo atributo
 }, { timestamps: true });
 
 module.exports = mongoose.model('Admin', adminSchema);
+

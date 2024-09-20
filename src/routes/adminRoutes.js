@@ -19,4 +19,6 @@ router.put('/:id', updateAdmin);
 // Eliminar admin
 router.delete('/:id', deleteAdmin);
 
+router.patch('/:email/toggle-active', adminController.toggleActiveStatus);
+
 module.exports = router;

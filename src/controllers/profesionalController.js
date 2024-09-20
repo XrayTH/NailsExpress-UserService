@@ -68,6 +68,25 @@ const deleteProfesional = async (req, res) => {
     }
 };
 
+const Profesional = require('../models/profesional');
+
+// Cambiar estado de activo
+exports.toggleActiveStatus = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const profesional = await Profesional.findOne({ email });
+
+        if (!profesional) return res.status(404).json({ message: 'Profesional no encontrado' });
+
+        profesional.activo = !profesional.activo; // Cambiar el estado
+        await profesional.save();
+
+        res.status(200).json({ message: 'Estado actualizado', activo: profesional.activo });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al cambiar el estado', error });
+    }
+};
+
 module.exports = {
     getProfesionales,
     getProfesionalById,
