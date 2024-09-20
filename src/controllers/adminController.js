@@ -37,10 +37,8 @@ const deleteAdmin = async (req, res) => {
     }
 };
 
-const Admin = require('../models/admin');
-
 // Cambiar estado de activo
-exports.toggleActiveStatus = async (req, res) => {
+const toggleActiveStatus = async (req, res) => {
     try {
         const { email } = req.params;
         const admin = await Admin.findOne({ email });
@@ -60,5 +58,6 @@ module.exports = {
     getAdmins,
     createAdmin,
     updateAdmin,
-    deleteAdmin
+    deleteAdmin,
+    toggleActiveStatus
 };

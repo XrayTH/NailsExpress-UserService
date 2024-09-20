@@ -68,10 +68,8 @@ const deleteProfesional = async (req, res) => {
     }
 };
 
-const Profesional = require('../models/profesional');
-
 // Cambiar estado de activo
-exports.toggleActiveStatus = async (req, res) => {
+const toggleActiveStatus = async (req, res) => {
     try {
         const { email } = req.params;
         const profesional = await Profesional.findOne({ email });
@@ -94,6 +92,7 @@ module.exports = {
     getProfesionalByUsername,
     createProfesional,
     updateProfesional,
-    deleteProfesional
+    deleteProfesional,
+    toggleActiveStatus
 };
 

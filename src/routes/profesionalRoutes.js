@@ -7,7 +7,8 @@ const {
     getProfesionalByUsername, 
     createProfesional, 
     updateProfesional, 
-    deleteProfesional 
+    deleteProfesional,
+    toggleActiveStatus
 } = require('../controllers/profesionalController');
 
 // Obtener todos los profesionales
@@ -31,6 +32,6 @@ router.put('/:id', updateProfesional);
 // Eliminar profesional
 router.delete('/:id', deleteProfesional);
 
-router.patch('/:email/toggle-active', profesionalController.toggleActiveStatus);
+router.patch('/:email/toggle-active', toggleActiveStatus);
 
 module.exports = router;

@@ -67,10 +67,8 @@ const deleteCliente = async (req, res) => {
     }
 };
 
-const Cliente = require('../models/cliente');
-
 // Cambiar estado de activo
-exports.toggleActiveStatus = async (req, res) => {
+const toggleActiveStatus = async (req, res) => {
     try {
         const { email } = req.params;
         const cliente = await Cliente.findOne({ email });
@@ -94,6 +92,7 @@ module.exports = {
     getClienteByUsername,
     createCliente,
     updateCliente,
-    deleteCliente
+    deleteCliente,
+    toggleActiveStatus
 };
 

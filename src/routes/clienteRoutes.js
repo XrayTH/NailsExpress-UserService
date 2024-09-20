@@ -7,7 +7,8 @@ const {
     getClienteByUsername, 
     createCliente, 
     updateCliente, 
-    deleteCliente 
+    deleteCliente,
+    toggleActiveStatus
 } = require('../controllers/clienteController');
 
 // Obtener todos los clientes
@@ -31,6 +32,6 @@ router.put('/:id', updateCliente);
 // Eliminar cliente
 router.delete('/:id', deleteCliente);
 
-router.patch('/:email/toggle-active', clienteController.toggleActiveStatus);
+router.patch('/:email/toggle-active', toggleActiveStatus);
 
 module.exports = router;

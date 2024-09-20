@@ -4,7 +4,8 @@ const {
     getAdmins,
     createAdmin, 
     updateAdmin, 
-    deleteAdmin 
+    deleteAdmin,
+    toggleActiveStatus 
 } = require('../controllers/adminController');
 
 // Obtener todos los admins
@@ -19,6 +20,6 @@ router.put('/:id', updateAdmin);
 // Eliminar admin
 router.delete('/:id', deleteAdmin);
 
-router.patch('/:email/toggle-active', adminController.toggleActiveStatus);
+router.patch('/:email/toggle-active', toggleActiveStatus);
 
 module.exports = router;
