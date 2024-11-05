@@ -46,18 +46,41 @@ const createProfesional = async (req, res) => {
         await newProfesional.save();
         res.status(201).json(newProfesional);
     } catch (error) {
-        res.status(500).json({ message: 'Error al crear profesional' });
+        if (error.name === 'ValidationError') {
+            const errors = Object.values(error.errors).map(err => err.message);
+            res.status(400).json({ message: 'Error de validación', errors });
+        } else if (error.code === 11000) {
+            const field = Object.keys(error.keyValue).join(', ');
+            res.status(409).json({ message: `El campo ${field} ya está en uso` });
+        } else {
+            res.status(500).json({ message: `Error al crear profesional: ${error.message}` });
+        }
     }
 };
 
 const updateProfesional = async (req, res) => {
     try {
-        const updatedProfesional = await Profesional.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+            return res.status(400).json({ message: 'ID de profesional no válido' });
+        }
+        const updatedProfesional = await Profesional.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        if (!updatedProfesional) {
+            return res.status(404).json({ message: 'Profesional no encontrado' });
+        }
         res.json(updatedProfesional);
     } catch (error) {
-        res.status(500).json({ message: 'Error al actualizar profesional' });
+        if (error.name === 'ValidationError') {
+            const errors = Object.values(error.errors).map(err => err.message);
+            res.status(400).json({ message: 'Error de validación', errors });
+        } else if (error.code === 11000) {
+            const field = Object.keys(error.keyValue).join(', ');
+            res.status(409).json({ message: `El campo ${field} ya está en uso` });
+        } else {
+            res.status(500).json({ message: `Error al actualizar profesional: ${error.message}` });
+        }
     }
 };
+
 
 const deleteProfesional = async (req, res) => {
     try {
