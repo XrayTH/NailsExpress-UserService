@@ -31,7 +31,7 @@ const getClienteByEmail = async (req, res) => {
 
 const getClienteByUsername = async (req, res) => {
     try {
-        const cliente = await Cliente.findOne({ username: req.params.username });
+        const cliente = await Cliente.findOne({ usuario: req.params.username });
         if (!cliente) return res.status(404).json({ message: 'Cliente no encontrado' });
         res.json(cliente);
     } catch (error) {
