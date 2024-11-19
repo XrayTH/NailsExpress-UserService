@@ -32,7 +32,7 @@ const getProfesionalByEmail = async (req, res) => {
 
 const getProfesionalByUsername = async (req, res) => {
     try {
-        const profesional = await Profesional.findOne({ username: req.params.username });
+        const profesional = await Profesional.findOne({ usuario: req.params.username });
         if (!profesional) return res.status(404).json({ message: 'Profesional no encontrado' });
         res.json(profesional);
     } catch (error) {
