@@ -54,10 +54,27 @@ const toggleActiveStatus = async (req, res) => {
     }
 };
 
+// Obtener admin por email
+const getAdminByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const admin = await Admin.findOne({ email });
+
+        if (!admin) {
+            return res.status(404).json({ message: 'Administrador no encontrado' });
+        }
+
+        res.json(admin);
+    } catch (error) {
+        res.status(500).json({ message: 'Error al obtener el administrador', error });
+    }
+};
+
 module.exports = {
     getAdmins,
     createAdmin,
     updateAdmin,
     deleteAdmin,
-    toggleActiveStatus
+    toggleActiveStatus,
+    getAdminByEmail // Exportar el nuevo método
 };

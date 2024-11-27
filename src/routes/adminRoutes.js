@@ -11,6 +11,8 @@ const {
 // Obtener todos los admins
 router.get('/', getAdmins);
 
+router.get('/:email', adminController.getAdminByEmail);
+
 // Crear nuevo admin
 router.post('/', createAdmin);
 
